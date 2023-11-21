@@ -9,13 +9,13 @@ struct item
     int quantity;
 };
 
-void readDataFromFile(struct item *toy, int *nt, char filename[])
+void readDataFromFile(struct item *toy, int *nt, char filepath[])
 {
-    FILE *databaseFile = fopen(filename, "r");
+    FILE *databaseFile = fopen(filepath, "r");
     if (databaseFile == NULL)
     {
         fclose(databaseFile);
-        FILE *databaseFile = fopen(filename, "w");
+        FILE *databaseFile = fopen(filepath, "w");
         fclose(databaseFile);
         return;
     }
@@ -30,9 +30,9 @@ void readDataFromFile(struct item *toy, int *nt, char filename[])
     return;
 }
 
-void saveDataToFile(struct item *toy, int nt, char filename[])
+void saveDataToFile(struct item *toy, int nt, char filepath[])
 {
-    FILE *databaseFile = fopen(filename, "w");
+    FILE *databaseFile = fopen(filepath, "w");
     if (databaseFile == NULL)
     {
         perror("File could not be opened");
@@ -44,13 +44,13 @@ void saveDataToFile(struct item *toy, int nt, char filename[])
         fprintf(databaseFile, "%d,%s,%.2f,%d\n", toy[i].id, toy[i].name, toy[i].price, toy[i].quantity);
     }
     fclose(databaseFile);
-    readDataFromFile(toy, &nt, "inventory.bin");
+    readDataFromFile(toy, &nt, "../data/inventory.bin");
     return;
 }
 
 void backUpData(struct item *toy, int nt)
 {
-    saveDataToFile(toy, nt, "backup.bin");
+    saveDataToFile(toy, nt, "../data/backup.bin");
     return;
 }
 
@@ -87,7 +87,7 @@ void addNewToy(struct item toy[], int *n)
     printf("Quantity: ");
     scanf("%d", &toy[*n].quantity);
     (*n)++;
-    saveDataToFile(toy, *n, "inventory.bin");
+    saveDataToFile(toy, *n, "../data/inventory.bin");
     printf("\nToy added successfully\n");
 }
 
@@ -106,7 +106,7 @@ void removeToy(struct item toy[], int *n)
                 toy[j] = toy[j + 1];
             }
             (*n)--;
-            saveDataToFile(toy, *n, "inventory.bin");
+            saveDataToFile(toy, *n, "../data/inventory.bin");
             printf("\nToy removed successfully\n");
             return;
         }
@@ -130,7 +130,7 @@ void updateToyDetails(struct item toy[], int n)
             scanf("%f", &toy[i].price);
             printf("Quantity: ");
             scanf("%d", &toy[i].quantity);
-            saveDataToFile(toy, n, "inventory.bin");
+            saveDataToFile(toy, n, "../data/inventory.bin");
             printf("\nToy updated successfully\n");
             return;
         }
@@ -176,7 +176,7 @@ int main()
     // Intialize data from file
     struct item toy[100];
     int nt;
-    readDataFromFile(toy, &nt, "inventory.bin");
+    readDataFromFile(toy, &nt, "../data/inventory.bin");
 
     int user, select;
     do
