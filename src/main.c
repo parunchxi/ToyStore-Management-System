@@ -5,6 +5,7 @@
 #include <time.h>
 #include "../lib/user.c"
 #include "../lib/decoration.c"
+#include "../lib/warehouse.c"
 
 void delay(int milliseconds)
 {
@@ -15,6 +16,10 @@ void delay(int milliseconds)
 
 int main()
 {
+    struct item toy[100];
+    int nt;
+    readDataFromFile(toy, &nt, "../data/inventory.bin");
+
     int user = 0;
     int choice[5] = {-1, -1, -1, -1, -1};
 
@@ -35,18 +40,17 @@ int main()
                 {
                 case 1:
                     // Admin
+                    banner();
                     do
                     {
-                        banner();
                         header("Admin Menu");
                         printf("1. View Store Report\n");
                         printf("2. Display All Toys\n");
                         printf("3. Add a New Toy\n");
                         printf("4. Remove a Toy\n");
                         printf("5. Update Toy Details\n");
-                        printf("6. Search for Toys\n");
-                        printf("7. Back Up Database\n");
-                        printf("8. Restore Database\n");
+                        printf("6. Back Up Database\n");
+                        printf("7. Restore Database\n");
                         printf("0. Logout\n");
                         printf(">> ");
                         scanf("%d", &choice[1]);
@@ -57,24 +61,28 @@ int main()
                             break;
                         case 2:
                             // Display All Toys
+                            displayAllToys(toy, nt);
                             break;
                         case 3:
                             // Add a New Toy
+                            addNewToy(toy, &nt);
                             break;
                         case 4:
                             // Remove a Toy
+                            removeToy(toy, &nt);
                             break;
                         case 5:
                             // Update Toy Details
+                            updateToyDetails(toy, nt);
                             break;
                         case 6:
-                            // Search for Toys
+                            // Back Up Database
+                            backUpData(toy, nt);
                             break;
                         case 7:
-                            // Back Up Database
-                            break;
-                        case 8:
                             // Restore Database
+                            restoreData(toy, &nt);
+                            readDataFromFile(toy, &nt, "../data/inventory.bin");
                             break;
                         case 0:
                             danger("Logging out...");
@@ -82,7 +90,7 @@ int main()
                             break;
                         default:
                             danger("Invalid choice!");
-                            printf("Press enter to continue...");
+                            printf("Press enter to continue...\n");
                             getch();
                         }
                     } while (choice[1] != 0);
@@ -104,7 +112,7 @@ int main()
                         return 0;
                     default:
                         danger("Invalid choice!");
-                        printf("Press enter to continue...");
+                        printf("Press enter to continue...\n");
                         getch();
                     }
                 }
@@ -115,7 +123,7 @@ int main()
             return 0;
         default:
             danger("Invalid choice!");
-            printf("Press enter to continue...");
+            printf("Press enter to continue...\n");
             getch();
         }
     } while (choice[0] != 0);
