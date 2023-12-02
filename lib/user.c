@@ -74,17 +74,11 @@ int login()
                 success("\nLogin success!\n");
                 delay(2000);
                 if (strcmp(user[j].role, "admin") == 0)
-                {
                     return 1;
-                }
                 else if (strcmp(user[j].role, "cashier") == 0)
-                {
                     return 2;
-                }
                 else if (strcmp(user[j].role, "god") == 0)
-                {
                     return 3;
-                }
             }
             else
             {
