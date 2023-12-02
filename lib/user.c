@@ -72,7 +72,7 @@ int login()
             {
                 banner();
                 success("\nLogin success!\n");
-                delay(2000);
+                delay(1000);
                 if (strcmp(user[j].role, "admin") == 0)
                     return 1;
                 else if (strcmp(user[j].role, "cashier") == 0)

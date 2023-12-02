@@ -24,44 +24,41 @@ int main()
         printf("0. Exit\n");
         printf(">> ");
         scanf("%d", &choice[0]);
-        if (choice[0] == 1)
+        switch (choice[0])
         {
+        case 1:
             do
             {
                 user = login();
-                if (user == 1)
+                switch (user)
                 {
+                case 1:
                     // Admin
-                }
-                else if (user == 2)
-                {
+                    break;
+                case 2:
                     // Cashier
-                }
-                else if (user == 0)
-                {
+                    break;
+                case 0:
                     printf("1. Try again\n");
                     printf("0. Exit\n");
                     printf(">> ");
                     scanf("%d", &choice[1]);
-                    if (choice[1] == 0)
-                        return 0;
-                    else if (choice[1] == 1)
-                        continue;
-                    else
+                    switch (choice[1])
                     {
+                    case 1:
+                        continue;
+                    case 0:
+                        return 0;
+                    default:
                         danger("Invalid choice!");
                         printf("Press enter to continue...");
                         getch();
                     }
                 }
             } while (choice[1] != 0);
-        }
-        else if (choice[0] == 0)
-        {
+        case 0:
             return 0;
-        }
-        else
-        {
+        default:
             danger("Invalid choice!");
             printf("Press enter to continue...");
             getch();
