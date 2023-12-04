@@ -141,6 +141,10 @@ int main()
                                 showCart(cart, nc);
                                 warning("Cart not cleared!\n");
                                 break;
+                            default:
+                                danger("Invalid choice!");
+                                printf("Press enter to continue...\n\n");
+                                getch();
                             }
                         case 5:
                             // Checkout
@@ -162,6 +166,10 @@ int main()
                                 showCart(cart, nc);
                                 warning("Checkout cancelled!\n");
                                 break;
+                            default:
+                                danger("Invalid choice!");
+                                printf("Press enter to continue...\n\n");
+                                getch();
                             }
                             break;
                         case 0:
