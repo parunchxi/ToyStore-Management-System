@@ -55,8 +55,8 @@ void backUpData(struct item *toy, int nt)
 
 void restoreData(struct item *toy, int *nt)
 {
-    readDataFromFile(toy, &nt, "../data/backup.bin");
-    saveDataToFile(toy, nt, "../data/inventory.bin");
+    readDataFromFile(toy, nt, "../data/backup.bin");
+    saveDataToFile(toy, *nt, "../data/inventory.bin");
     banner();
     success("\nDatabase restored successfully!\n");
     return;
@@ -174,21 +174,26 @@ float totalPrice(struct item toy[], int n)
 
 void showCart(struct item cart[], int nc)
 {
-    banner();
     header("Cart");
+    if (nc == 0)
+    {
+        printf("Cart is empty!\n\n");
+        return;
+    }
     bold("ID\tName\t\t\tPrice\tQuantity");
     for (int i = 0; i < nc; i++)
     {
         printf("%d\t%-20s\t%.2f\t%d\n", cart[i].id, cart[i].name, cart[i].price, cart[i].quantity);
     }
-    printf("Total Quantity: %d\n", totalQuantity(cart, nc));
-    printf("Total Price: %.2f\n", totalPrice(cart, nc));
+    printf("\nTotal Quantity: %d\n", totalQuantity(cart, nc));
+    printf("Total Price: %.2f\n\n", totalPrice(cart, nc));
 }
 
-void addToCart(struct item toy[], struct item *cart[], int *nt, int *nc)
+void addToCart(struct item toy[], struct item cart[], int *nt, int *nc)
 {
     displayAllToys(toy, *nt);
-    header("\nAdd to Cart");
+    showCart(cart, *nc);
+    header("Add to Cart");
     int id, quantity;
     printf("ID: ");
     scanf("%d", &id);
@@ -198,32 +203,52 @@ void addToCart(struct item toy[], struct item *cart[], int *nt, int *nc)
         {
             for (int j = 0; j < *nc; j++)
             {
-                if (cart[j]->id == id)
+                if (cart[j].id == id)
                 {
                     printf("Quantity: ");
                     scanf("%d", &quantity);
-                    cart[j]->quantity += quantity;
+                    if (cart[j].quantity + quantity > toy[i].quantity)
+                    {
+                        banner();
+                        showCart(cart, *nc);
+                        danger("Not enough quantity!\n");
+                        return;
+                    }
+                    cart[j].quantity += quantity;
+                    banner();
                     showCart(cart, *nc);
-                    success("\nToy added to cart successfully!\n");
+                    success("Toy added to cart successfully!\n");
                     return;
                 }
             }
             printf("Quantity: ");
             scanf("%d", &quantity);
-            cart[*nc] = &toy[i];
-            cart[*nc]->quantity = quantity;
+            if (quantity > toy[i].quantity)
+            {
+                banner();
+                showCart(cart, *nc);
+                danger("Not enough quantity!\n");
+                return;
+            }
+            cart[*nc].id = toy[i].id;
+            strcpy(cart[*nc].name, toy[i].name);
+            cart[*nc].price = toy[i].price;
+            cart[*nc].quantity = quantity;
             (*nc)++;
+            banner();
             showCart(cart, *nc);
-            success("\nToy added to cart successfully!\n");
+            success("Toy added to cart successfully!\n");
             return;
         }
     }
+    banner();
+    showCart(cart, *nc);
     danger("Invalid ID!\n");
 }
 
 // void removeFromCart(struct item *cart[], int *nc)
 // {
-//     showCart(cart, *nc);
+//     showCart(&cart, &nc);
 //     header("\nRemove from Cart");
 //     int id;
 //     printf("ID: ");
@@ -260,7 +285,7 @@ void addToCart(struct item toy[], struct item *cart[], int *nt, int *nc)
 
 // void checkout(struct item toy[], struct item *cart[], int *nt, int *nc)
 // {
-//     showCart(cart, *nc);
+//     showCart(&cart, &nc);
 //     header("Checkout");
 //     printf("1. Confirm\n");
 //     printf("0. Cancel\n");
@@ -272,7 +297,7 @@ void addToCart(struct item toy[], struct item *cart[], int *nt, int *nc)
 //     case 1:
 //         *nc = 0;
 //         decreseInventory(toy, cart, &nt, &nc);
-//         readDataFromFile(toy, &nt, "../data/inventory.bin");
+//         readDataFromFile(toy, nt, "../data/inventory.bin");
 //         banner();
 //         success("\nCheckout successful!\n");
 //         break;

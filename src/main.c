@@ -92,6 +92,7 @@ int main()
                     // Cashier
                     struct item cart[100];
                     int nc = 0;
+                    banner();
                     showCart(cart, nc);
                     do
                     {
@@ -109,6 +110,7 @@ int main()
                         case 1:
                             // Display All Toys
                             displayAllToys(toy, nt);
+                            showCart(cart, nc);
                             break;
                         case 2:
                             // Add to Cart
@@ -132,7 +134,7 @@ int main()
                             break;
                         default:
                             danger("Invalid choice!");
-                            printf("Press enter to continue...\n");
+                            printf("Press enter to continue...\n\n");
                             getch();
                         }
                     } while (choice[1] != 0);

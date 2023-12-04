@@ -10,7 +10,7 @@ void resetStyle()
 
 void banner()
 {
-    // clearScreen();
+    clearScreen();
     printf("\e[105m            TOY STORE MANAGEMENT SYSTEM            \e[0m\n");
 }
 
