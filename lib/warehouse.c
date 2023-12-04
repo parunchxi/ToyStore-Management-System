@@ -214,6 +214,13 @@ void addToCart(struct item toy[], struct item cart[], int *nt, int *nc)
                         danger("Not enough quantity!\n");
                         return;
                     }
+                    else if (quantity <= 0)
+                    {
+                        banner();
+                        showCart(cart, *nc);
+                        danger("Invalid quantity!\n");
+                        return;
+                    }
                     cart[j].quantity += quantity;
                     banner();
                     showCart(cart, *nc);
@@ -228,6 +235,13 @@ void addToCart(struct item toy[], struct item cart[], int *nt, int *nc)
                 banner();
                 showCart(cart, *nc);
                 danger("Not enough quantity!\n");
+                return;
+            }
+            else if (quantity <= 0)
+            {
+                banner();
+                showCart(cart, *nc);
+                danger("Invalid quantity!\n");
                 return;
             }
             cart[*nc].id = toy[i].id;
