@@ -11,7 +11,12 @@ void displayAllToys(struct item toy[], int n);
 void addNewToy(struct item toy[], int *n);
 void removeToy(struct item toy[], int *n);
 void updateToyDetails(struct item toy[], int n);
-void sellToy(struct item toy[], int *n);
-
+float totalPrice(struct item toy[], int n);
+void showCart(struct item cart[], int nc);
+void addToCart(struct item toy[], struct item *cart[], int *nt, int *nc);
+// void removeFromCart(struct item *cart[], int *nc);
+// void decreseInventory(struct item toy[], struct item *cart[], int *n, int *nc);
+// void checkout(struct item toy[], struct item *cart[], int *nt, int *nc);
+// void clearCart(struct item *cart[], int *nc);
 
 #endif
