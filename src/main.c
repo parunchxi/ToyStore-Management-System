@@ -118,7 +118,7 @@ int main()
                             break;
                         case 3:
                             // Remove from Cart
-                            // removeFromCart(cart, &nc);
+                            removeFromCart(cart, &nc);
                             break;
                         case 4:
                             // Clear cart

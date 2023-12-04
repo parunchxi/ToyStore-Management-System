@@ -246,27 +246,31 @@ void addToCart(struct item toy[], struct item cart[], int *nt, int *nc)
     danger("Invalid ID!\n");
 }
 
-// void removeFromCart(struct item *cart[], int *nc)
-// {
-//     showCart(&cart, &nc);
-//     header("\nRemove from Cart");
-//     int id;
-//     printf("ID: ");
-//     scanf("%d", &id);
-//     for (int i = 0; i < *nc; i++)
-//     {
-//         if (cart[i]->id == id)
-//         {
-//             for (int j = i; j < *nc - 1; j++)
-//                 cart[j] = cart[j + 1];
-//             (*nc)--;
-//             banner();
-//             success("\nToy removed from cart successfully!\n");
-//             return;
-//         }
-//     }
-//     danger("Invalid ID!\n");
-// }
+void removeFromCart(struct item cart[], int *nc)
+{
+    banner();
+    showCart(cart, *nc);
+    header("Remove from Cart");
+    int id;
+    printf("ID: ");
+    scanf("%d", &id);
+    for (int i = 0; i < *nc; i++)
+    {
+        if (cart[i].id == id)
+        {
+            for (int j = i; j < *nc - 1; j++)
+                cart[j] = cart[j + 1];
+            (*nc)--;
+            banner();
+            showCart(cart, *nc);
+            success("Toy removed from cart successfully!\n");
+            return;
+        }
+    }
+    banner();
+    showCart(cart, *nc);
+    danger("Invalid ID!\n");
+}
 
 // void decreseInventory(struct item toy[], struct item *cart[], int *n, int *nc)
 // {
