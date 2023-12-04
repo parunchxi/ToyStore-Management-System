@@ -3,16 +3,10 @@
 #include <string.h>
 #include <conio.h>
 #include <time.h>
-#include "../lib/user.c"
 #include "../lib/decoration.c"
+#include "../lib/reusable.c"
+#include "../lib/user.c"
 #include "../lib/warehouse.c"
-
-void delay(int milliseconds)
-{
-    clock_t start_time = clock();
-    while (clock() < start_time + milliseconds)
-        ;
-}
 
 int main()
 {
