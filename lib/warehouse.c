@@ -328,9 +328,9 @@ void removeFromCart(struct item cart[], int *nc)
 //     }
 // }
 
-// void clearCart(struct item *cart[], int *nc)
-// {
-//     *nc = 0;
-//     banner();
-//     success("\nCart cleared successfully!\n");
-// }
+void clearCart(struct item cart[], int *nc)
+{
+    *nc = 0;
+    banner();
+    success("\nCart cleared successfully!\n");
+}

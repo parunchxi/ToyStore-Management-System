@@ -93,7 +93,6 @@ int main()
                     struct item cart[100];
                     int nc = 0;
                     banner();
-                    showCart(cart, nc);
                     do
                     {
                         header("Cashier Menu");
@@ -122,8 +121,27 @@ int main()
                             break;
                         case 4:
                             // Clear cart
-                            // clearCart(cart, &nc);
-                            break;
+                            int clearCartChoice;
+                            banner();
+                            showCart(cart, nc);
+                            header("Clear Cart");
+                            printf("1. Confirm\n");
+                            printf("0. Cancel\n");
+                            printf(">> ");
+                            scanf("%d", &clearCartChoice);
+                            switch (clearCartChoice)
+                            {
+                            case 1:
+                                clearCart(cart, &nc);
+                                banner();
+                                success("\nCart cleared successfully!\n");
+                                break;
+                            case 0:
+                                banner();
+                                showCart(cart, nc);
+                                warning("Cart not cleared!\n");
+                                break;
+                            }
                         case 5:
                             // Checkout
                             // checkout(toy, cart, &nt, &nc);
