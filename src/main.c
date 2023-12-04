@@ -144,7 +144,25 @@ int main()
                             }
                         case 5:
                             // Checkout
-                            // checkout(toy, cart, &nt, &nc);
+                            int checkoutChoice;
+                            banner();
+                            showCart(cart, nc);
+                            header("Checkout");
+                            printf("1. Confirm\n");
+                            printf("0. Cancel\n");
+                            printf(">> ");
+                            scanf("%d", &checkoutChoice);
+                            switch (checkoutChoice)
+                            {
+                            case 1:
+                                checkout(toy, cart, &nt, &nc);
+                                break;
+                            case 0:
+                                banner();
+                                showCart(cart, nc);
+                                warning("Checkout cancelled!\n");
+                                break;
+                            }
                             break;
                         case 0:
                             danger("Logging out...");

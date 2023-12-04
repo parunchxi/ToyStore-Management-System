@@ -286,51 +286,27 @@ void removeFromCart(struct item cart[], int *nc)
     danger("Invalid ID!\n");
 }
 
-// void decreseInventory(struct item toy[], struct item *cart[], int *n, int *nc)
-// {
-//     for (int i = 0; i < *nc; i++)
-//     {
-//         for (int j = 0; j < *n; j++)
-//         {
-//             if (cart[i]->id == toy[j].id)
-//             {
-//                 toy[j].quantity -= cart[i]->quantity;
-//             }
-//         }
-//     }
-//     saveDataToFile(toy, *n, "../data/inventory.bin");
-// }
-
-// void checkout(struct item toy[], struct item *cart[], int *nt, int *nc)
-// {
-//     showCart(&cart, &nc);
-//     header("Checkout");
-//     printf("1. Confirm\n");
-//     printf("0. Cancel\n");
-//     printf(">> ");
-//     int choice;
-//     scanf("%d", &choice);
-//     switch (choice)
-//     {
-//     case 1:
-//         *nc = 0;
-//         decreseInventory(toy, cart, &nt, &nc);
-//         readDataFromFile(toy, nt, "../data/inventory.bin");
-//         banner();
-//         success("\nCheckout successful!\n");
-//         break;
-//     case 0:
-//         banner();
-//         warning("\nCheckout cancelled!\n");
-//         break;
-//     default:
-//         danger("Invalid choice!\n");
-//     }
-// }
-
 void clearCart(struct item cart[], int *nc)
 {
     *nc = 0;
     banner();
     success("\nCart cleared successfully!\n");
+}
+
+void checkout(struct item toy[], struct item cart[], int *nt, int *nc)
+{
+    for (int i = 0; i < *nc; i++)
+    {
+        for (int j = 0; j < *nt; j++)
+        {
+            if (cart[i].id == toy[j].id)
+            {
+                toy[j].quantity -= cart[i].quantity;
+            }
+        }
+    }
+    clearCart(cart, nc);
+    saveDataToFile(toy, *nt, "../data/inventory.bin");
+    banner();
+    success("\nCheckout successful!\n");
 }
