@@ -45,6 +45,41 @@ void saveDataToFile(struct item *toy, int nt, char filepath[])
     return;
 }
 
+/// Tracking and Reorder Toy
+void TrackingAndReorderToy(struct item toy[], int n){
+
+  banner();
+  header("Tracking and Reorder Toy");
+  
+  int reorderThreshold = 10;
+  int reorderQuantity = 100;
+  int checker = 1;
+
+  for (int i = 0; i < n; i++)
+  {
+      if(toy[i].quantity <= reorderThreshold)
+      {
+        char detail[255];
+        toy[i].quantity = reorderQuantity;
+        sprintf(detail, "%d/%s/%.2f/%d", toy[i].id, toy[i].name, toy[i].price, reorderQuantity);
+        saveLog("System", "ReorderToy", "success", detail);
+        
+        if(checker == 1){
+            printf("Low quantity toys!\n");
+        }
+
+        
+        printf("Reorder %d\t%-20s\t to %d finish.\n", toy[i].id, toy[i].name , toy[i].quantity);
+        checker++;
+        saveDataToFile(toy, n, "../data/inventory.bin");
+      }
+  }
+    if(checker == 1){
+        printf("No low quantity toys.\n");
+    }
+  printf("\n");
+}
+
 void backUpData(char user[], struct item *toy, int nt)
 {
     saveDataToFile(toy, nt, "../data/backup.bin");
@@ -66,7 +101,9 @@ void restoreData(char user[], struct item *toy, int *nt)
 
 void displayAllToys(struct item toy[], int n)
 {
+    
     banner();
+    TrackingAndReorderToy(toy, n);
     header("All Toys");
     bold("ID\tName\t\t\tPrice\tQuantity");
     for (int i = 0; i < n; i++)
@@ -302,6 +339,12 @@ void clearCart(struct item cart[], int *nc)
     banner();
     success("\nCart cleared successfully!\n");
 }
+
+
+
+
+
+
 
 void checkout(char user[], struct item toy[], struct item cart[], int *nt, int *nc)
 {

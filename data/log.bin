@@ -1,0 +1,94 @@
+2023-12-05,18:29:24,admin,login,failed,Wrong password!
+2023-12-05,18:29:35,admin,login,success,
+2023-12-05,18:31:01,admin,logout,success,
+2023-12-05,18:31:08,cashier,login,success,
+2023-12-05,22:42:49,admin,login,success,
+2023-12-05,22:46:52,admin,login,success,
+2023-12-05,22:48:15,admin,login,success,
+2023-12-05,22:48:59,admin,login,success,
+2023-12-05,22:49:19,admin,removeToy,success,18/Ice Cream Set/20.00/100
+2023-12-05,22:49:28,admin,restore,success,
+2023-12-05,22:50:06,admin,updateToyDetails,success,22-Science Kit/10.00/100-Science_Kit/100.00/100
+2023-12-06,01:46:45,admin,login,success,
+2023-12-06,01:47:02,admin,logout,success,
+2023-12-06,01:47:09,cashier,login,success,
+2023-12-06,01:47:34,cashier,checkout,success,0//0.00/0
+2023-12-06,01:48:39,cashier,checkout,success,0//0.00/0
+2023-12-06,01:49:37,cashier,login,success,
+2023-12-06,01:49:59,cashier,logout,success,
+2023-12-06,01:50:28,cashier,login,success,
+2023-12-06,01:51:52,cashier,login,success,
+2023-12-06,01:53:24,cashier,login,success,
+2023-12-06,01:55:04,cashier,login,success,
+2023-12-06,02:00:11,cashier,login,success,
+2023-12-06,02:00:15,System,ReorderToy,success,23/Telescope/4000.00/100
+2023-12-06,02:00:43,cashier,checkout,success,0//0.00/0
+2023-12-06,02:00:45,System,ReorderToy,success,23/Telescope/4000.00/100
+2023-12-06,02:04:10,cashier,login,success,
+2023-12-06,02:04:59,cashier,login,success,
+2023-12-06,02:09:04,cashier,login,success,
+2023-12-06,02:10:34,cashier,checkout,success,1/LEGO Bricks/30.00/22
+2023-12-06,02:10:34,cashier,checkout,success,2/Play-Doh/20.00/100
+2023-12-06,02:10:37,System,ReorderToy,success,2/Play-Doh/20.00/100
+2023-12-06,02:12:38,cashier,login,success,
+2023-12-06,02:13:15,cashier,checkout,success,1/LEGO Bricks/30.00/71
+2023-12-06,02:13:16,System,ReorderToy,success,1/LEGO Bricks/30.00/100
+2023-12-06,02:15:44,cashier,login,success,
+2023-12-06,02:16:10,cashier,checkout,success,1/LEGO Bricks/30.00/99
+2023-12-06,02:16:13,System,ReorderToy,success,1/LEGO Bricks/30.00/100
+2023-12-06,02:20:58,cashier,login,success,
+2023-12-06,02:22:27,cashier,checkout,success,1/LEGO Bricks/30.00/99
+2023-12-06,02:22:27,cashier,checkout,success,0//0.00/0
+2023-12-06,02:22:27,cashier,checkout,success,0//0.00/0
+2023-12-06,02:22:29,System,ReorderToy,success,1/LEGO Bricks/30.00/100
+2023-12-06,02:22:30,System,ReorderToy,success,9/Pound-A-Bench/45.00/100
+2023-12-06,02:22:30,System,ReorderToy,success,14/Magic Tricks/90.00/100
+2023-12-06,02:25:52,cashier,login,success,
+2023-12-06,02:26:24,cashier,checkout,success,0//0.00/0
+2023-12-06,02:26:24,cashier,checkout,success,23/Telescope/4000.00/100
+2023-12-06,02:26:24,cashier,checkout,success,0//0.00/0
+2023-12-06,02:26:26,System,ReorderToy,success,1/LEGO Bricks/30.00/100
+2023-12-06,02:26:26,System,ReorderToy,success,6/UNO/25.00/100
+2023-12-06,02:26:26,System,ReorderToy,success,23/Telescope/4000.00/100
+2023-12-06,02:27:28,cashier,login,success,
+2023-12-06,02:28:01,cashier,checkout,success,1/LEGO Bricks/30.00/99
+2023-12-06,02:28:01,cashier,checkout,success,2/Play-Doh/20.00/99
+2023-12-06,02:28:01,cashier,checkout,success,0//0.00/0
+2023-12-06,02:28:01,cashier,checkout,success,0//0.00/0
+2023-12-06,02:28:03,System,ReorderToy,success,1/LEGO Bricks/30.00/100
+2023-12-06,02:28:03,System,ReorderToy,success,2/Play-Doh/20.00/100
+2023-12-06,02:28:03,System,ReorderToy,success,18/Ice Cream Set/20.00/100
+2023-12-06,02:28:03,System,ReorderToy,success,20/Sing-Along Microphone/55.00/100
+2023-12-06,02:32:42,admin,login,success,
+2023-12-06,02:32:54,admin,logout,success,
+2023-12-06,02:32:59,cashier,login,success,
+2023-12-06,02:48:48,admin,login,success,
+2023-12-06,02:48:51,admin,logout,success,
+2023-12-06,02:51:16,admin,login,success,
+2023-12-06,02:51:28,admin,restore,success,
+2023-12-06,02:54:19,admin,login,failed,Wrong password!
+2023-12-06,02:54:26,admin,login,success,
+2023-12-06,02:57:05,admin,login,success,
+2023-12-06,02:58:27,admin,login,success,
+2023-12-06,03:06:27,admin,login,success,
+2023-12-06,03:06:49,admin,login,success,
+2023-12-06,03:08:30,admin,login,success,
+2023-12-06,03:09:02,admin,addNewToy,success,-123/fe/10.00/10
+2023-12-06,03:14:38,admin,login,success,
+2023-12-06,03:19:50,admin,login,success,
+2023-12-06,03:20:11,admin,addUser,success,Nine/admin
+2023-12-06,03:20:16,admin,logout,success,
+2023-12-06,03:21:46,admin,login,success,
+2023-12-06,03:21:59,admin,removeUser,success,Nine/admin
+2023-12-06,03:24:58,admin,login,success,
+2023-12-06,03:29:36,admin,login,success,
+2023-12-06,03:31:57,admin,login,success,
+2023-12-06,03:34:44,admin,login,success,
+2023-12-06,03:36:36,admin,login,success,
+2023-12-06,03:37:33,admin,login,success,
+2023-12-06,03:42:48,admin,login,success,
+2023-12-06,03:47:18,admin,login,success,
+2023-12-06,03:51:31,cashier,login,success,
+2023-12-06,03:51:58,cashier,checkout,success,1/LEGO Bricks/30.00/99
+2023-12-06,03:52:02,System,ReorderToy,success,1/LEGO Bricks/30.00/100
+2023-12-06,03:55:47,admin,login,success,

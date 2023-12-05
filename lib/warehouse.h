@@ -17,5 +17,6 @@ void addToCart(struct item toy[], struct item cart[], int *nt, int *nc);
 void removeFromCart(struct item cart[], int *nc);
 void clearCart(struct item cart[], int *nc);
 void checkout(char user[], struct item toy[], struct item cart[], int *nt, int *nc);
+void TrackingAndReorderToy(struct item toy[], int n);//added New from nine
 
 #endif

@@ -102,12 +102,17 @@ void showUser()
     struct user user[100];
     int i = -1;
     getUserData(user, &i);
+
     banner();
     header("User List");
     bold("Username\tRole");
     for (int j = 0; j <= i; j++)
+    {
         printf("%s\t\t%s\n", user[j].username, user[j].role);
+    }
 }
+
+
 
 void addNewUser(char cuser[100])
 {
@@ -143,6 +148,7 @@ void addNewUser(char cuser[100])
         danger("\nPassword doesn't match!\n");
         return;
     }
+    printf("Select Role {admin, cashier}\n");
     printf("Role: ");
     scanf("%s", role);
     if (strcmp(role, "admin") != 0 && strcmp(role, "cashier") != 0 && strcmp(role, "god") != 0)
@@ -159,6 +165,8 @@ void addNewUser(char cuser[100])
     saveLog(cuser, "addUser", "success", detail);
     banner();
     success("\nUser added successfully!\n");
+
+    getUserData(user, &i);
 }
 
 void removeUser(char cuser[100])
@@ -199,4 +207,6 @@ void removeUser(char cuser[100])
     saveLog(cuser, "removeUser", "success", detail);
     banner();
     success("\nUser removed successfully!\n");
+
+    getUserData(user, &i);
 }
