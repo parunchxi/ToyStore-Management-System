@@ -8,6 +8,7 @@
 #include "../lib/reusable.c"
 #include "../lib/user.c"
 #include "../lib/warehouse.c"
+#include "../lib/bat.c"
 
 int main()
 {
@@ -17,6 +18,7 @@ int main()
     int loginChoice;
     do
     {
+        batman_loading();
         banner();
         printf("1. Login\n");
         printf("0. Exit\n");

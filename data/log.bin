@@ -92,3 +92,14 @@
 2023-12-06,03:51:58,cashier,checkout,success,1/LEGO Bricks/30.00/99
 2023-12-06,03:52:02,System,ReorderToy,success,1/LEGO Bricks/30.00/100
 2023-12-06,03:55:47,admin,login,success,
+2023-12-06,04:59:30,admin,login,success,
+2023-12-06,04:59:38,admin,logout,success,
+2023-12-06,05:01:49,cashier,login,success,
+2023-12-06,05:02:16,cashier,checkout,success,0//0.00/0
+2023-12-06,05:02:19,System,ReorderToy,success,3/Hot Wheels/50.00/100
+2023-12-06,05:02:31,cashier,logout,success,
+2023-12-06,05:02:37,admin,login,failed,Wrong password!
+2023-12-06,05:02:45,admin,login,success,
+2023-12-06,05:03:31,admin,addUser,success,markko/cashier
+2023-12-06,05:03:56,admin,removeUser,success,markko/cashier
+2023-12-06,05:03:59,admin,logout,success,
