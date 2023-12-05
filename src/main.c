@@ -8,15 +8,18 @@
 #include "../lib/reusable.c"
 #include "../lib/user.c"
 #include "../lib/warehouse.c"
+#include "../lib/bat.c"
 
 int main()
 {
     struct item toy[100];
     int nt;
+
     readDataFromFile(toy, &nt, "../data/inventory.bin");
     int loginChoice;
     do
     {
+        batman_loading();
         banner();
         printf("1. Login\n");
         printf("0. Exit\n");
