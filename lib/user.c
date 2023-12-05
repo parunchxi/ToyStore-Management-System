@@ -96,3 +96,107 @@ int login(char *cuser)
         }
     }
 }
+
+void showUser()
+{
+    struct user user[100];
+    int i = -1;
+    getUserData(user, &i);
+    banner();
+    header("User List");
+    bold("Username\tRole");
+    for (int j = 0; j <= i; j++)
+        printf("%s\t\t%s\n", user[j].username, user[j].role);
+}
+
+void addNewUser(char cuser[100])
+{
+    struct user user[100];
+    int i = -1;
+    getUserData(user, &i);
+
+    char username[255];
+    char password[255];
+    char confirm[255];
+    char role[255];
+
+    showUser();
+    header("Add User");
+    printf("Username: ");
+    scanf("%s", username);
+    for (int j = 0; j <= i; j++)
+    {
+        if (strcmp(username, user[j].username) == 0)
+        {
+            banner();
+            danger("\nUsername already exists!\n");
+            return;
+        }
+    }
+    printf("Password: ");
+    passwordInput(password);
+    printf("Confirm Password: ");
+    passwordInput(confirm);
+    if (strcmp(password, confirm) != 0)
+    {
+        banner();
+        danger("\nPassword doesn't match!\n");
+        return;
+    }
+    printf("Role: ");
+    scanf("%s", role);
+    if (strcmp(role, "admin") != 0 && strcmp(role, "cashier") != 0 && strcmp(role, "god") != 0)
+    {
+        banner();
+        danger("\nRole doesn't exist!\n");
+        return;
+    }
+    FILE *fp = fopen("../data/user.bin", "a");
+    fprintf(fp, "%s,%s,%s\n", username, password, role);
+    fclose(fp);
+    char detail[255];
+    sprintf(detail, "%s/%s", username, role);
+    saveLog(cuser, "addUser", "success", detail);
+    banner();
+    success("\nUser added successfully!\n");
+}
+
+void removeUser(char cuser[100])
+{
+    struct user user[100];
+    int i = -1;
+    getUserData(user, &i);
+
+    char username[255];
+    showUser();
+    header("Remove User");
+    printf("Username: ");
+    scanf("%s", username);
+    int j;
+    for (j = 0; j <= i; j++)
+    {
+        if (strcmp(username, user[j].username) == 0)
+            break;
+    }
+    if (j > i)
+    {
+        banner();
+        danger("\nUsername not found!\n");
+        return;
+    }
+    FILE *fp = fopen("../data/user.bin", "w");
+    fprintf(fp, "Username,Password,Role\n");
+    for (int k = 0; k < i; k++)
+    {
+        if (k != j)
+        {
+            fprintf(fp, "%s,%s,%s\n", user[k].username, user[k].password, user[k].role);
+        }
+    }
+    fclose(fp);
+    char detail[255];
+    sprintf(detail, "%s/%s", user[j].username, user[j].role);
+    saveLog(cuser, "removeUser", "success", detail);
+    banner();
+    success("\nUser removed successfully!\n");
+}

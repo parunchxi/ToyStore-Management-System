@@ -45,6 +45,8 @@ int main()
                         printf("5. Update Toy Details\n");
                         printf("6. Back Up Database\n");
                         printf("7. Restore Database\n");
+                        printf("8. Add New User\n");
+                        printf("9. Remove User\n");
                         printf("0. Logout\n");
                         printf(">> ");
                         scanf("%d", &adminChoice);
@@ -83,6 +85,14 @@ int main()
                             // Restore Database
                             restoreData(username, toy, &nt);
                             readDataFromFile(toy, &nt, "../data/inventory.bin");
+                            break;
+                        case 8:
+                            // Add New User
+                            addNewUser(username);
+                            break;
+                        case 9:
+                            // Remove User
+                            removeUser(username);
                             break;
                         case 0:
                             saveLog(username, "logout", "success", "");
