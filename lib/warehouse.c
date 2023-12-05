@@ -64,11 +64,6 @@ void restoreData(char user[], struct item *toy, int *nt)
     return;
 }
 
-void storeReport(struct item toy[], int n)
-{
-    // code
-}
-
 void displayAllToys(struct item toy[], int n)
 {
     banner();

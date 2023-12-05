@@ -52,6 +52,12 @@ int main()
                         {
                         case 1:
                             // View Store Report
+                            banner();
+                            header("Store Report");
+                            char date[255];
+                            printf("Date (YYYY-MM-DD): ");
+                            scanf("%s", date);
+                            showLogByDate(date);
                             break;
                         case 2:
                             // Display All Toys
