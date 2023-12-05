@@ -4,6 +4,7 @@
 #include <conio.h>
 #include <time.h>
 #include "../lib/decoration.c"
+#include "../lib/log.c"
 #include "../lib/reusable.c"
 #include "../lib/user.c"
 #include "../lib/warehouse.c"
@@ -13,28 +14,26 @@ int main()
     struct item toy[100];
     int nt;
     readDataFromFile(toy, &nt, "../data/inventory.bin");
-
-    char username[100];
-    int role = 0;
-    int choice[5] = {-1, -1, -1, -1, -1};
-
+    int loginChoice;
     do
     {
         banner();
         printf("1. Login\n");
         printf("0. Exit\n");
         printf(">> ");
-        scanf("%d", &choice[0]);
-        switch (choice[0])
+        scanf("%d", &loginChoice);
+        switch (loginChoice)
         {
         case 1:
             do
             {
-                role = login(&username);
+                char username[100];
+                int role = login(username);
                 switch (role)
                 {
                 case 1:
                     // Admin
+                    int adminChoice;
                     banner();
                     do
                     {
@@ -48,8 +47,8 @@ int main()
                         printf("7. Restore Database\n");
                         printf("0. Logout\n");
                         printf(">> ");
-                        scanf("%d", &choice[1]);
-                        switch (choice[1])
+                        scanf("%d", &adminChoice);
+                        switch (adminChoice)
                         {
                         case 1:
                             // View Store Report
@@ -60,26 +59,27 @@ int main()
                             break;
                         case 3:
                             // Add a New Toy
-                            addNewToy(toy, &nt);
+                            addNewToy(username, toy, &nt);
                             break;
                         case 4:
                             // Remove a Toy
-                            removeToy(toy, &nt);
+                            removeToy(username, toy, &nt);
                             break;
                         case 5:
                             // Update Toy Details
-                            updateToyDetails(toy, nt);
+                            updateToyDetails(username, toy, nt);
                             break;
                         case 6:
                             // Back Up Database
-                            backUpData(toy, nt);
+                            backUpData(username, toy, nt);
                             break;
                         case 7:
                             // Restore Database
-                            restoreData(toy, &nt);
+                            restoreData(username, toy, &nt);
                             readDataFromFile(toy, &nt, "../data/inventory.bin");
                             break;
                         case 0:
+                            saveLog(username, "logout", "success", "");
                             danger("Logging out...");
                             delay(1000);
                             break;
@@ -88,9 +88,11 @@ int main()
                             printf("Press enter to continue...\n");
                             getch();
                         }
-                    } while (choice[1] != 0);
+                    } while (adminChoice != 0);
+                    break;
                 case 2:
                     // Cashier
+                    int cashierChoice;
                     struct item cart[100];
                     int nc = 0;
                     banner();
@@ -104,8 +106,8 @@ int main()
                         printf("5. Checkout\n");
                         printf("0. Logout\n");
                         printf(">> ");
-                        scanf("%d", &choice[1]);
-                        switch (choice[1])
+                        scanf("%d", &cashierChoice);
+                        switch (cashierChoice)
                         {
                         case 1:
                             // Display All Toys
@@ -160,7 +162,7 @@ int main()
                             switch (checkoutChoice)
                             {
                             case 1:
-                                checkout(toy, cart, &nt, &nc);
+                                checkout(username, toy, cart, &nt, &nc);
                                 break;
                             case 0:
                                 banner();
@@ -174,6 +176,7 @@ int main()
                             }
                             break;
                         case 0:
+                            saveLog(username, "logout", "success", "");
                             danger("Logging out...");
                             delay(1000);
                             break;
@@ -182,14 +185,14 @@ int main()
                             printf("Press enter to continue...\n\n");
                             getch();
                         }
-                    } while (choice[1] != 0);
+                    } while (cashierChoice != 0);
                     break;
                 case 0:
                     printf("1. Try again\n");
                     printf("0. Exit\n");
                     printf(">> ");
-                    scanf("%d", &choice[0]);
-                    switch (choice[0])
+                    scanf("%d", &loginChoice);
+                    switch (loginChoice)
                     {
                     case 1:
                         continue;
@@ -203,7 +206,8 @@ int main()
                         getch();
                     }
                 }
-            } while (choice[0] != 0);
+            } while (loginChoice != 0);
+            break;
         case 0:
             danger("Exiting...");
             delay(1000);
@@ -213,7 +217,7 @@ int main()
             printf("Press enter to continue...\n");
             getch();
         }
-    } while (choice[0] != 0);
+    } while (loginChoice != 0);
 
     return 0;
 }

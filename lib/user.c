@@ -49,7 +49,7 @@ void passwordInput(char *password)
     password[i] = '\0';
 }
 
-int login(char *username)
+int login(char *cuser)
 {
     struct user user[100];
     int i = -1;
@@ -70,7 +70,8 @@ int login(char *username)
             passwordInput(password);
             if (strcmp(password, user[j].password) == 0)
             {
-                strcpy(username, user[j].username);
+                strcpy(cuser, user[j].username);
+                saveLog(username, "login", "success", "");
                 banner();
                 success("\nLogin success!\n");
                 delay(1000);
@@ -83,6 +84,7 @@ int login(char *username)
             }
             else
             {
+                saveLog(username, "login", "failed", "Wrong password!");
                 danger("Wrong password!");
                 return 0;
             }

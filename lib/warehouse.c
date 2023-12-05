@@ -45,18 +45,20 @@ void saveDataToFile(struct item *toy, int nt, char filepath[])
     return;
 }
 
-void backUpData(struct item *toy, int nt)
+void backUpData(char user[], struct item *toy, int nt)
 {
     saveDataToFile(toy, nt, "../data/backup.bin");
+    saveLog(user, "backup", "success", "");
     banner();
     success("\nDatabase backed up successfully!\n");
     return;
 }
 
-void restoreData(struct item *toy, int *nt)
+void restoreData(char user[], struct item *toy, int *nt)
 {
     readDataFromFile(toy, nt, "../data/backup.bin");
     saveDataToFile(toy, *nt, "../data/inventory.bin");
+    saveLog(user, "restore", "success", "");
     banner();
     success("\nDatabase restored successfully!\n");
     return;
@@ -79,7 +81,7 @@ void displayAllToys(struct item toy[], int n)
     printf("\n");
 }
 
-void addNewToy(struct item toy[], int *n)
+void addNewToy(char user[], struct item toy[], int *n)
 {
     displayAllToys(toy, *n);
     header("Add a New Toy");
@@ -102,10 +104,13 @@ void addNewToy(struct item toy[], int *n)
     (*n)++;
     saveDataToFile(toy, *n, "../data/inventory.bin");
     banner();
+    char detail[255];
+    sprintf(detail, "%d/%s/%.2f/%d", toy[*n - 1].id, toy[*n - 1].name, toy[*n - 1].price, toy[*n - 1].quantity);
+    saveLog(user, "addNewToy", "success", detail);
     success("\nToy added successfully!\n");
 }
 
-void removeToy(struct item toy[], int *n)
+void removeToy(char user[], struct item toy[], int *n)
 {
     displayAllToys(toy, *n);
     header("Remove a Toy");
@@ -122,6 +127,9 @@ void removeToy(struct item toy[], int *n)
             }
             (*n)--;
             saveDataToFile(toy, *n, "../data/inventory.bin");
+            char detail[255];
+            sprintf(detail, "%d/%s/%.2f/%d", toy[i].id, toy[i].name, toy[i].price, toy[i].quantity);
+            saveLog(user, "removeToy", "success", detail);
             banner();
             success("\nToy removed successfully!\n");
             return;
@@ -130,7 +138,7 @@ void removeToy(struct item toy[], int *n)
     danger("Invalid ID!\n");
 }
 
-void updateToyDetails(struct item toy[], int n)
+void updateToyDetails(char user[], struct item toy[], int n)
 {
     displayAllToys(toy, n);
     header("Update Toy Details");
@@ -141,12 +149,19 @@ void updateToyDetails(struct item toy[], int n)
     {
         if (toy[i].id == id)
         {
+            char oldName[255];
+            strcpy(oldName, toy[i].name);
+            float oldPrice = toy[i].price;
+            int oldQuantity = toy[i].quantity;
             printf("Name: ");
             scanf("%s", toy[i].name);
             printf("Price: ");
             scanf("%f", &toy[i].price);
             printf("Quantity: ");
             scanf("%d", &toy[i].quantity);
+            char detail[255];
+            sprintf(detail, "%d-%s/%.2f/%d-%s/%.2f/%d", toy[i].id, oldName, oldPrice, oldQuantity, toy[i].name, toy[i].price, toy[i].quantity);
+            saveLog(user, "updateToyDetails", "success", detail);
             saveDataToFile(toy, n, "../data/inventory.bin");
             banner();
             success("\nToy updated successfully\n");
@@ -293,7 +308,7 @@ void clearCart(struct item cart[], int *nc)
     success("\nCart cleared successfully!\n");
 }
 
-void checkout(struct item toy[], struct item cart[], int *nt, int *nc)
+void checkout(char user[], struct item toy[], struct item cart[], int *nt, int *nc)
 {
     for (int i = 0; i < *nc; i++)
     {
@@ -302,6 +317,9 @@ void checkout(struct item toy[], struct item cart[], int *nt, int *nc)
             if (cart[i].id == toy[j].id)
             {
                 toy[j].quantity -= cart[i].quantity;
+                char detail[255];
+                sprintf(detail, "%d/%s/%.2f/%d", cart[j].id, cart[j].name, cart[j].price, cart[j].quantity);
+                saveLog(user, "checkout", "success", detail);
             }
         }
     }
