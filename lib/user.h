@@ -2,6 +2,6 @@
 #define USER_DOT_H
 
 struct user;
-int login();
+int login(char *username);
 
 #endif

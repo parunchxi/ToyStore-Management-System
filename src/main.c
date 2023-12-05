@@ -14,7 +14,8 @@ int main()
     int nt;
     readDataFromFile(toy, &nt, "../data/inventory.bin");
 
-    int user = 0;
+    char username[100];
+    int role = 0;
     int choice[5] = {-1, -1, -1, -1, -1};
 
     do
@@ -29,8 +30,8 @@ int main()
         case 1:
             do
             {
-                user = login();
-                switch (user)
+                role = login(&username);
+                switch (role)
                 {
                 case 1:
                     // Admin
