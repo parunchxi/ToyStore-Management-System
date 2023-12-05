@@ -10,5 +10,4 @@ void success(char *msg);
 void header(char *msg);
 void bold(char *msg);
 
-
 #endif
