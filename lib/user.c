@@ -49,6 +49,21 @@ void passwordInput(char *password)
     password[i] = '\0';
 }
 
+void encrypt(char *password, int key)
+{
+    for (int i = 0; i < strlen(password); i++)
+        if (i % 2 == 0)
+            password[i] += key;
+        else if (i % 3 == 0)
+            password[i] -= key;
+        else if (i % 5 == 0)
+            password[i] += (key - 3);
+        else if (i % 7 == 0)
+            password[i] -= (key + 4);
+        else
+            password[i] *= key;
+}
+
 int login(char *cuser)
 {
     struct user user[100];
@@ -68,6 +83,7 @@ int login(char *cuser)
         {
             printf("Password: ");
             passwordInput(password);
+            encrypt(password, 4);
             if (strcmp(password, user[j].password) == 0)
             {
                 strcpy(cuser, user[j].username);
@@ -112,8 +128,6 @@ void showUser()
     }
 }
 
-
-
 void addNewUser(char cuser[100])
 {
     struct user user[100];
@@ -157,6 +171,7 @@ void addNewUser(char cuser[100])
         danger("\nRole doesn't exist!\n");
         return;
     }
+    encrypt(password, 4);
     FILE *fp = fopen("../data/user.bin", "a");
     fprintf(fp, "%s,%s,%s\n", username, password, role);
     fclose(fp);
